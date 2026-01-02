@@ -35,4 +35,10 @@ class MenuService
         return $query->orderBy('title')
                      ->paginate($perPage);
     }
+
+    public function getMenuById(int $id)
+    {
+        return Menu::with(['theme', 'diets', 'dishes.allergens', 'images'])
+                   ->findOrFail($id);
+    }
 }

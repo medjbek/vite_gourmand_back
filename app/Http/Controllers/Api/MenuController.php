@@ -29,4 +29,11 @@ class MenuController extends Controller
 
         return response()->json($menus);
     }
+
+    public function show($id)
+    {
+        $menu = $this->menuService->getMenuById($id);
+
+        return response()->json($menu);
+    }
 }
