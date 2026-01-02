@@ -11,3 +11,4 @@ Route::get('/opening-hours', [OpeningHourController::class, 'index']);
 Route::post('/contact', [ContactController::class, 'send']);
 
 Route::get('/menus', [MenuController::class, 'index']);
+Route::get('/menus/{id}', [MenuController::class, 'show']);

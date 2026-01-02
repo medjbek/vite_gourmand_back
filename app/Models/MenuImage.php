@@ -14,8 +14,15 @@ class MenuImage extends Model
         'path',
     ];
 
+    protected $appends = ['url'];
+
     public function menu()
     {
         return $this->belongsTo(Menu::class);
+    }
+    
+    public function getUrlATtribute(): string
+    {
+        return asset('storage/' . $this->path);
     }
 }
