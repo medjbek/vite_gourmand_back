@@ -17,7 +17,15 @@ class MenuController extends Controller
 
     public function index(Request $request)
     {
-        $menus = $this->menuService->getMenus();
+        $filters = $request->only([
+            'theme_id',
+            'diet_id',
+            'price_min',
+            'price_max',
+            'min_people'
+        ]);
+
+        $menus = $this->menuService->getMenus($filters, 10);
 
         return response()->json($menus);
     }
