@@ -20,7 +20,7 @@ class MenuImage extends Model
     {
         return $this->belongsTo(Menu::class);
     }
-    
+
     public function getUrlATtribute(): string
     {
         return asset('storage/' . $this->path);

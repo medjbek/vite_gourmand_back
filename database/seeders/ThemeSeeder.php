@@ -11,11 +11,10 @@ class ThemeSeeder extends Seeder
     {
         DB::statement("
             INSERT INTO themes (name, created_at, updated_at) VALUES
-            ('Cuisine française', NOW(), NOW()),
-            ('Cuisine italienne', NOW(), NOW()),
-            ('Cuisine asiatique', NOW(), NOW()),
-            ('Cuisine végétarienne', NOW(), NOW()),
-            ('Cuisine festive', NOW(), NOW())
+            ('Noël', NOW(), NOW()),
+            ('Pâques', NOW(), NOW()),
+            ('Classique', NOW(), NOW()),
+            ('Évènement', NOW(), NOW()),
         ");
     }
 }
