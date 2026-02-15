@@ -11,7 +11,8 @@ class OpeningHourController extends Controller
 {
     public function __construct(
         private OpeningHourService $openingHourService
-    ) {}
+    ) {
+    }
 
     public function index()
     {

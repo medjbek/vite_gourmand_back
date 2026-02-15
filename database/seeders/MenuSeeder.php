@@ -69,7 +69,7 @@ class MenuSeeder extends Seeder
             (
                 'Menu Festif',
                 'Menu idéal pour événements et réceptions',
-                5,
+                3,
                 20,
                 35.00,
                 15,
