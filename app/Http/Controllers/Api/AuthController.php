@@ -40,4 +40,20 @@ class AuthController extends Controller
 
         return response()->json($result, 201);
     }
+
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $result = $this->authService->login($request->email, $request->password);
+
+        if (!$result) {
+            throw ValidationException::withMessages(['email' => ['Invalid credentials']]);
+        }
+
+        return response()->json($result);
+    }
 }
