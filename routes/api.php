@@ -15,3 +15,4 @@ Route::get('/menus', [MenuController::class, 'index']);
 Route::get('/menus/{id}', [MenuController::class, 'show']);
 
 Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
