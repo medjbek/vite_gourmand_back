@@ -14,7 +14,7 @@ class ThemeSeeder extends Seeder
             ('Noël', NOW(), NOW()),
             ('Pâques', NOW(), NOW()),
             ('Classique', NOW(), NOW()),
-            ('Évènement', NOW(), NOW()),
+            ('Évènement', NOW(), NOW())
         ");
     }
 }
