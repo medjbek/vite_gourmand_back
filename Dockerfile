@@ -7,6 +7,8 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     libpng-dev \
     default-mysql-client \
+    && pecl install mongodb \
+    && docker-php-ext-enable mongodb \
     && docker-php-ext-install pdo_mysql zip opcache \
     && rm -rf /var/lib/apt/lists/*
 
