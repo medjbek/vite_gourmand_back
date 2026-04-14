@@ -17,6 +17,12 @@ class OrderController extends Controller
         $this->orderService = $orderService;
     }
 
+    public function index()
+    {
+        $orders = $this->orderService->listUserOrders(Auth::id());
+        return response()->json($orders);
+    }
+
     public function store(Request $request)
     {
         $request->validate([

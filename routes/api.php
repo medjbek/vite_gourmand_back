@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\OpeningHourController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\FilterController;
 
 Route::get('/opening-hours', [OpeningHourController::class, 'index']);
@@ -23,5 +24,6 @@ Route::get('/themes', [FilterController::class, 'themes']);
 Route::get('/diets', [FilterController::class, 'diets']);
 
 Route::middleware('auth:sanctum')->group(function() {
+    Route::get('/my-orders', [OrderController::class, 'index']);
     Route::post('/orders', [OrderController::class, 'store']);
 });
