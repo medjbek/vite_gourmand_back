@@ -7,12 +7,16 @@ use App\Models\Menu;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderConfirmation;
-use App\Mail\OrderCompleted;
 use App\Models\Mongo\MenuOrderStat;
 use Carbon\Carbon;
 
 class OrderService
 {
+    public function listUserOrders($userId)
+    {
+        return Order::with('menu')->where('user_id', $userId)->get();
+    }
+
     public function createOrder(array $data): Order
     {
         $menu = Menu::findOrFail($data['menu_id']);
