@@ -21,3 +21,7 @@ Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logo
 
 Route::get('/themes', [FilterController::class, 'themes']);
 Route::get('/diets', [FilterController::class, 'diets']);
+
+Route::middleware('auth:sanctum')->group(function() {
+    Route::post('/orders', [OrderController::class, 'store']);
+});
