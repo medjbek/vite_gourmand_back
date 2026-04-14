@@ -17,6 +17,7 @@ Route::get('/menus/{id}', [MenuController::class, 'show']);
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 
 Route::get('/themes', [FilterController::class, 'themes']);
 Route::get('/diets', [FilterController::class, 'diets']);

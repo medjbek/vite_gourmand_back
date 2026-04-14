@@ -15,7 +15,6 @@ class AuthService
      */
     public function register(array $data): array
     {
-        // dd($data);
         $user = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
@@ -49,5 +48,13 @@ class AuthService
         $token = $user->createToken('api')->plainTextToken;
 
         return ['user' => $user, 'token' => $token];
+    }
+
+    /**
+     * Déconnexion de l'utilisateur (supprime le token courant).
+     */
+    public function logout(User $user): void
+    {
+        $user->currentAccessToken()->delete();
     }
 }
