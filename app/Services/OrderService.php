@@ -17,6 +17,26 @@ class OrderService
         return Order::with('menu')->where('user_id', $userId)->get();
     }
 
+    public function listAllOrders()
+    {
+        return Order::with('menu')->orderBy('created_at', 'desc')->get();
+    }
+
+    public function updateOrderStatus($id, $status): Order
+    {
+        $order = Order::findOrFail($id);
+
+        $order->status = $status;
+        $order->save();
+
+        $order->statusHistories()->create([
+            'status' => $status,
+            'changed_by' => Auth::id(),
+        ]);
+
+        return $order->load('menu');
+    }
+
     public function createOrder(array $data): Order
     {
         $menu = Menu::findOrFail($data['menu_id']);
@@ -56,13 +76,11 @@ class OrderService
             'status' => 'pending',
         ]);
 
-        // Historique initial
         $order->statusHistories()->create([
             'status' => 'pending',
             'changed_by' => Auth::id(),
         ]);
 
-        // Mail confirmation
         Mail::to(Auth::user()->email)->send(new OrderConfirmation($order));
 
         return $order;

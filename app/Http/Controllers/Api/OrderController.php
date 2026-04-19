@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Services\OrderService;
-use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,6 +19,12 @@ class OrderController extends Controller
     public function index()
     {
         $orders = $this->orderService->listUserOrders(Auth::id());
+        return response()->json($orders);
+    }
+
+    public function all()
+    {
+        $orders = $this->orderService->listAllOrders();
         return response()->json($orders);
     }
 
@@ -40,5 +45,16 @@ class OrderController extends Controller
 
         $order = $this->orderService->createOrder($request->all());
         return response()->json($order, 201);
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:accepted,preparing,delivering,delivered,completed',
+        ]);
+
+        $order = $this->orderService->updateOrderStatus($id, $request->status);
+
+        return response()->json($order);
     }
 }
