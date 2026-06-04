@@ -28,4 +28,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/orders', [OrderController::class, 'all']);
     Route::post('/orders', [OrderController::class, 'store']);
     Route::patch('/orders/{id}/status', [OrderController::class, 'updateStatus']);
+    Route::post('/admin/create-user', [AuthController::class, 'createUserByAdmin']);
 });
