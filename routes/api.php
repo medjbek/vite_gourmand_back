@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\FilterController;
+use App\Http\Controllers\Api\StatsController;
 
 Route::get('/opening-hours', [OpeningHourController::class, 'index']);
 
@@ -29,4 +30,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/orders', [OrderController::class, 'store']);
     Route::patch('/orders/{id}/status', [OrderController::class, 'updateStatus']);
     Route::post('/admin/create-user', [AuthController::class, 'createUserByAdmin']);
+    Route::get('/admin/menu-order-stats', [StatsController::class, 'menuOrderStats']);
 });
