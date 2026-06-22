@@ -18,7 +18,7 @@ Route::get('/menus', [MenuController::class, 'index']);
 Route::get('/menus/{id}', [MenuController::class, 'show']);
 
 Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:login');
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 
 Route::get('/themes', [FilterController::class, 'themes']);
@@ -28,7 +28,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/my-orders', [OrderController::class, 'index']);
     Route::get('/orders', [OrderController::class, 'all']);
     Route::post('/orders', [OrderController::class, 'store']);
+});
+
+Route::middleware(['auth:sanctum', 'role:employee,admin'])->group(function() {
     Route::patch('/orders/{id}/status', [OrderController::class, 'updateStatus']);
+});
+
+Route::middleware(['auth:sanctum', 'role:admin'])->group(function() {
     Route::post('/admin/create-user', [AuthController::class, 'createUserByAdmin']);
     Route::get('/admin/menu-order-stats', [StatsController::class, 'menuOrderStats']);
 });
