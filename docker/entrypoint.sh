@@ -3,6 +3,9 @@ set -e
 
 cd /var/www
 
+rm -f public/storage
+php artisan storage:link || true
+
 # Générer la clé Laravel si absente
 if [ -f ".env" ]; then
   if ! grep -q "^APP_KEY=base64:" .env; then
